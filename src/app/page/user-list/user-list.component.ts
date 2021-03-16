@@ -39,7 +39,9 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {this.userService.getAll2()}
 
-  onDelete(e:User):void{this.userService.remove(e).subscribe(e=>this.userService.getAll2())}
+  onDelete(e:User):void{
+    if(confirm("Are you sure to delete"+e.name))
+    this.userService.remove(e).subscribe(e=>this.userService.getAll2())}
 
 
 }
