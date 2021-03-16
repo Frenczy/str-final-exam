@@ -47,7 +47,7 @@ export class UserService {
    * The method is: this.http.post
    */
   create(user:User):Observable<User>{
-    return this.http.post<User>(`${this.endpoint}/${user.id}`, user).pipe(tap(()=>this.getAll2()))}
+    return this.http.post<User>(`${this.endpoint}`, user).pipe(tap(()=>this.getAll2()))}
 
   /**
    * Update a user in the database.

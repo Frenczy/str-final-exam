@@ -20,7 +20,7 @@ export class UserEditorComponent implements OnInit {
    * 1. If the params.id is 0: new User().
    * 2. If the params.id isn't 0: a user from the database based on its id.
    */
-  user$: Observable<User> = this.activatedRoute.params.pipe(
+/*   user$: Observable<User> = this.activatedRoute.params.pipe(
     switchMap( params => {
       if (Number(params.id) === 0) {
         return of(new User());
@@ -28,7 +28,7 @@ export class UserEditorComponent implements OnInit {
 
       return this.userService.get(Number(params.id));
     })
-  );
+  ) */;
 
   user=new User()
 
