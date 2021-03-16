@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
+import { tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { User } from '../model/user';
 export class UserService {
 
   endpoint: string = 'http://localhost:3000/users';
+
+  list$:BehaviorSubject<User[]>= new BehaviorSubject<User[]>([])
 
   constructor(
     private http: HttpClient
@@ -19,8 +22,9 @@ export class UserService {
    * @returns on observable with all users.
    */
   getAll(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.endpoint}`);
-  }
+    return this.http.get<User[]>(`${this.endpoint}`)}
+  getAll2(): void {
+    this.http.get<User[]>(`${this.endpoint}`).subscribe(e=>this.list$.next(e))}
 
   /**
    * Get a specified user from the database by id.
@@ -28,26 +32,27 @@ export class UserService {
    * @returns an observable with a user object.
    */
   get(id: number): Observable<User> {
-    return this.http.get<User>(`${this.endpoint}/${id}`);
-  }
+    return this.http.get<User>(`${this.endpoint}/${id}`)}
 
   /**
    * Delete a user from the database.
    * The method is: this.http.delete
    */
-
-
+  remove(user:User):Observable<User>{
+    console.log(`${this.endpoint}/${user.id}`)
+    return this.http.delete<User>(`${this.endpoint}/${user.id}`)}
 
   /**
    * Create a user in the database.
    * The method is: this.http.post
    */
-
-
+  create(user:User):Observable<User>{
+    return this.http.post<User>(`${this.endpoint}/${user.id}`, user).pipe(tap(()=>this.getAll2()))}
 
   /**
    * Update a user in the database.
    * The method is: this.http.patch
    */
-
+  update(user:User):Observable<User>{
+    return this.http.patch<User>(`${this.endpoint}/${user.id}`, user)}
 }
