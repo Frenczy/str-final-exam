@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 mt-2">
-    <h2>User List <select [(ngModel)]="dropdown"><option *ngFor="let i of dropdownlist" [value]="i">{{ i }}</option></select><input [(ngModel)]="kereso" placeholder="Search..."></h2>
+    <h2>User List <select [(ngModel)]="dropdown"><option *ngFor="let i of dropdownlist" [value]="i">{{ i }}</option></select><input [(ngModel)]="phrase" placeholder="Search..."></h2>
     <button [routerLink]="['user/' + 0]" type="submit" class="btn btn-light btn-block mb-2">
       Add new User</button>
     <table class="table table-striped">
@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users2$ | async | filter:dropdown:kereso | sorter:order:position">
+        <tr *ngFor="let user of users2$ | async | filter:dropdown:phrase | sorter:order:position">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>

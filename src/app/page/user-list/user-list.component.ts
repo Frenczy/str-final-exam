@@ -41,7 +41,4 @@ export class UserListComponent implements OnInit {
 
   onDelete(e:User):void{
     if(confirm("Are you sure to delete"+e.name))
-    this.userService.remove(e).subscribe(e=>this.userService.getAll2())}
-
-
-}
+    this.userService.remove(e).subscribe(e=>this.userService.getAll2())}}
